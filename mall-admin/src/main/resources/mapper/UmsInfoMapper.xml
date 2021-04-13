@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mall.admin.dao.UmsAdminDao">
+
+    <select id="getUmsAdminByUserName" resultType="com.mall.admin.enerty.dto.UserInfo">
+        SELECT
+	        a.username,
+	        a.password,
+	        a.email,
+	        a.nick_name,
+	        c.id as roleId,
+	        c.`name` as roleName
+        FROM ums_admin a
+        INNER JOIN ums_admin_role_relation b on a.id=b.admin_id
+        INNER JOIN ums_role c on b.role_id=c.id
+        WHERE
+            a.username=#{userName}
+    </select>
+
+
+    <select id="findMenuListByLevel" resultType="com.mall.admin.enerty.db.Menu">
+        select
+            id,
+            parent_id,
+            title,
+            level,
+            sort,
+            name,
+            icon,
+            hidden,
+            url
+        from ums_menu
+        where
+            level = #{level}
+    </select>
+
+</mapper>

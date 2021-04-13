@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="mall-common" />
+        <module name="mall-auth" />
+        <module name="mall-admin" />
+        <module name="pay_slave8082" />
+        <module name="mall-gateway" />
+        <module name="mall-client" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="11">
+      <module name="common" target="11" />
+      <module name="eureka" target="11" />
+      <module name="eureka_slave" target="11" />
+      <module name="gateway" target="11" />
+      <module name="order" target="11" />
+      <module name="pay" target="11" />
+      <module name="pay_slave" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="mall-admin" options="-parameters" />
+      <module name="mall-auth" options="-parameters" />
+      <module name="mall-client" options="-parameters" />
+      <module name="mall-common" options="-parameters" />
+      <module name="mall-gateway" options="-parameters" />
+    </option>
+  </component>
+</project>
