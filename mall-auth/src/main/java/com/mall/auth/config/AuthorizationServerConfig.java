@@ -62,8 +62,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         clients.inMemory()
                 .withClient("client")
                 .secret(passwordEncoder.encode("client"))
-                .accessTokenValiditySeconds(3600 * 24)
-                .refreshTokenValiditySeconds(3600 * 24 * 7)
+                .accessTokenValiditySeconds(60 * 60 * 24)
+                .refreshTokenValiditySeconds(60 * 60 * 24)
                 .scopes("all")
                 //设置认证的方式
                 .authorizedGrantTypes("authorization_code", "password", "refresh_token", "client_credentials");
@@ -77,7 +77,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
      * @throws Exception
      */
     @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         TokenEnhancerChain chain = new TokenEnhancerChain();
         List<TokenEnhancer> list = new ArrayList<>();
         list.add(jwtTokenEnhacer);

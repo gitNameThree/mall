@@ -5,20 +5,23 @@
 <mapper namespace="com.mall.admin.dao.MenuDao">
 
     <select id="findMenuList" resultType="com.mall.admin.enerty.db.Menu">
-        select
-            id,
-            parent_id,
-            title,
-            level,
-            sort,
-            name,
-            icon,
-            hidden,
-            url
-        from ums_menu
-        order by sort
+	SELECT
+		a.id,
+		a.parent_id,
+		a.title,
+		a.LEVEL,
+		a.sort,
+		a.NAME,
+		a.icon,
+		a.hidden,
+		a.url
+	FROM
+		ums_menu a
+	INNER JOIN ums_role_menu_relation b on a.id=b.menu_id
+	WHERE b.role_id= #{roleId}
+    ORDER BY
+	    a.sort
     </select>
-
 
     <select id="findMenuListByLevel" resultType="com.mall.admin.enerty.db.Menu">
         select

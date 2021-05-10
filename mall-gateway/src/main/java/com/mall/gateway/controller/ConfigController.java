@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class ConfigController {
 
 
-    @GetMapping("/getConfigInfo")
+        @GetMapping("/getConfigInfo")
     private String getConfigInfo(){
-        return "";
+        return "ssss";
     }
 }

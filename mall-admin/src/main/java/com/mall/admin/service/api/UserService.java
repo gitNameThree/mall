@@ -1,6 +1,6 @@
 package com.mall.admin.service.api;
 
-import com.mall.admin.enerty.dto.UserInfo;
+import com.mall.common.entity.UserInfo;
 
 /**
  * @author 谢成伟

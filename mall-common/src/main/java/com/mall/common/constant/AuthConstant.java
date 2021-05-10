@@ -51,4 +51,9 @@ public interface AuthConstant {
      */
     String USER_TOKEN_HEADER = "user";
 
+    /**
+     * 用户信息Http请求头
+     */
+    String USER_ID_TOKEN_HEADER = "userId";
+
 }

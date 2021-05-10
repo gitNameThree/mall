@@ -1,6 +1,8 @@
 package com.mall.admin.service.api;
 
 import com.mall.admin.enerty.db.Menu;
+import com.mall.admin.enerty.db.Role;
+import com.mall.admin.enerty.dto.LoginParams;
 import com.mall.admin.enerty.vi.AuthToken;
 import org.springframework.http.HttpEntity;
 import org.springframework.util.MultiValueMap;
@@ -23,18 +25,25 @@ public interface PermitService {
     List<Menu> findMenuList();
 
     /**
-     *返回一级菜单
-     * @return list
+     * 返回角色列表
+     *
+     * @return
      */
-    List<Menu> findFirstMenuList();
+    List<Role> findRoleList();
+
 
 
     /**
-     * 认证服务器申请令牌，存储令牌
-     * @param url 认证服务器地址
-     * @param multiValueMapHttpEntity 请求对象
-     * @return  AuthToken
+     * 登录请求
+     * @param loginParams
+     * @return
      */
-    AuthToken applyForToken(String url, HttpEntity<MultiValueMap<String,Object >> multiValueMapHttpEntity);
+    AuthToken applyForToken(LoginParams loginParams);
+
+    /**
+     * 退出登录接口
+     * @return
+     */
+    boolean loginOut();
 
 }

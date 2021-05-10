@@ -14,7 +14,8 @@ import java.lang.annotation.Target;
  * @ action  请表明此文件的用途
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE , ElementType.METHOD,ElementType.ANNOTATION_TYPE})
+@Target({ElementType.TYPE, ElementType.METHOD, ElementType.ANNOTATION_TYPE})
 @Import(GlobeResponseConfig.class)
-public @interface EnableGlobalDispose  {
+public @interface EnableGlobalResponse {
+
 }

@@ -1,8 +1,4 @@
-package com.mall.common.enerty;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+package com.mall.common.entity;
 
 /**
  * @author 谢成伟

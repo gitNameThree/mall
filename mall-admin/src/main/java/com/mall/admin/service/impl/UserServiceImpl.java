@@ -1,8 +1,9 @@
 package com.mall.admin.service.impl;
 
-import com.mall.admin.enerty.dto.UserInfo;
+import com.alibaba.fastjson.JSONObject;
 import com.mall.admin.service.api.UserService;
 import com.mall.common.constant.AuthConstant;
+import com.mall.common.entity.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,13 +24,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserInfo getUserInfo() {
-        try {
-            request.setCharacterEncoding("UTF-8");
-        }catch (Exception e){
-            e.printStackTrace();
-        }
         String userStr = request.getHeader(AuthConstant.USER_TOKEN_HEADER);
-        UserInfo userInfo = new UserInfo();
+        String userId = request.getHeader(AuthConstant.USER_ID_TOKEN_HEADER);
+        UserInfo userInfo = JSONObject.parseObject(userStr,UserInfo.class);
+        userInfo.setUserId(userId);
         return userInfo;
     }
 }

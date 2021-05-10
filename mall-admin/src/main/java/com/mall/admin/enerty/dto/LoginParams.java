@@ -6,18 +6,14 @@ import lombok.NoArgsConstructor;
 
 /**
  * @author 谢成伟
- * Date:2021/4/13
- * Time:10:54
+ * Date:2021/4/21
+ * Time:10:34
  * @ action  请表明此文件的用途
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserInfo {
+public class LoginParams {
     private String username;
     private String password;
-    private String email;
-    private String nickName;
-    private String roleId;
-    private String roleName;
 }

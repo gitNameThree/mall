@@ -2,6 +2,7 @@ package com.mall.admin.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.mall.admin.enerty.db.Menu;
+import com.mall.admin.enerty.db.Role;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -16,11 +17,11 @@ import java.util.List;
 @Repository
 public interface MenuDao extends BaseMapper<Menu> {
     /**
-     * 返回所有的菜单
-     *
-     * @return list<Menu>
+     * 更具角色ID获取菜单列表
+     * @param roleId 角色Id
+     * @return
      */
-    List<Menu> findMenuList();
+    List<Menu> findMenuList(@Param("roleId")Integer roleId);
 
     /**
      * 返回所有的菜单

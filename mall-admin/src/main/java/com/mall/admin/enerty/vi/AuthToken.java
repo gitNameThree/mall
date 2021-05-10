@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuthToken {
-    private Integer tokenTime ;
+    private Integer tokenTimeout ;
     private String accessToken;
+    private String username;
 }

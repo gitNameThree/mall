@@ -1,9 +1,9 @@
 import React, {Component} from "react";
 import {Button, Modal, PageHeader} from "antd";
 import {MenuOutlined} from '@ant-design/icons'
-import HttpUtil from "../../utils/HttpUtil";
-import Api from "../../common/Api";
-import CustomTable from "../base/Table";
+import HttpUtil from "../../../utils/HttpUtil";
+import Api from "../../../common/Api";
+import CustomTable from "../../base/Table";
 class MenuList extends Component {
     constructor(props) {
         super(props);
@@ -62,7 +62,7 @@ class MenuList extends Component {
     componentWillMount() {
         // 获取第一级菜单数据
         HttpUtil.get(Api.findFirstMenuList).then(response => {
-            if (response.code !== "200") {
+            if (response.status !== "200") {
                 Modal.error({
                     title: '获取菜单失败',
                     content: '暂无数据请联系管理员-发送请求失败'

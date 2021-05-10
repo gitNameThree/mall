@@ -8,7 +8,8 @@ package com.mall.admin.contstant;
  */
 public enum ConstEnum {
     TIME_OUT_SECOND("180", "超时时间"),
-    KEY_HEAD("USER:", "保存到redis的请求头");
+    MENU_KEY("admin:MenuItem:key:", "菜单列表key"),
+    KEY_HEAD("admin:login:userId:", "保存到redis的请求头");
 
     private String code;
     private String message;

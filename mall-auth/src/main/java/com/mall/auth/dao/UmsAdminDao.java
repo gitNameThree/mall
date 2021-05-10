@@ -1,8 +1,9 @@
-package com.mall.admin.dao;
+package com.mall.auth.dao;
+
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.mall.admin.enerty.db.UmsAdmin;
-import com.mall.admin.enerty.dto.UserInfo;
+import com.mall.auth.enerty.db.UmsAdmin;
+import com.mall.auth.enerty.dto.UserInfo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
