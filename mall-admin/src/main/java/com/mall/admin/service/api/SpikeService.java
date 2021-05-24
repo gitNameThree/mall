@@ -41,4 +41,11 @@ public interface SpikeService {
      * @return
      */
     boolean editFlashPromotion(SpikeProductDto spikeProductDto);
+
+    /**
+     * 秒杀商品预热
+     * @param productId 商品的Id
+     * @return
+     */
+    boolean warmUpProduct(Integer productId);
 }

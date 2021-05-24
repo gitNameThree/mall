@@ -17,7 +17,6 @@ import org.springframework.http.client.ClientHttpResponse;
 public class RestTemplateExceptionHandler {
     public static ClientHttpResponse handleException(HttpRequest request, byte[] body,
                                                      ClientHttpRequestExecution execution, BlockException exception) {
-
         UnityResult unityResult = UnityResult.error("408","服务调用异常");
         return  new SentinelClientHttpResponse(JSONObject.toJSONString(unityResult));
 

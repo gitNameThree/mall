@@ -57,18 +57,18 @@ class Spike extends Component {
     }
 
     componentWillMount() {
-        HttpUtil.get(Api.findRoleList,this.props).then(response => {
-            if (response.status !== "200") {
-                Modal.error({
-                    title: '系统出错',
-                    content: '暂无数据请联系管理员'
-                });
-                return;
-            }
-            this.setState({
-                dataSource: response.data
-            })
-        })
+        // HttpUtil.get(Api.findRoleList,this.props).then(response => {
+        //     if (response.status !== "200") {
+        //         Modal.error({
+        //             title: '系统出错',
+        //             content: '暂无数据请联系管理员'
+        //         });
+        //         return;
+        //     }
+        //     this.setState({
+        //         dataSource: response.data
+        //     })
+        // })
     }
 
     render() {

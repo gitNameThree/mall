@@ -1,7 +1,10 @@
 package com.mall.admin.controller;
 
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.mall.admin.enerty.db.Role;
 import com.mall.admin.enerty.dto.LoginParams;
+import com.mall.admin.enerty.dto.RoleDto;
 import com.mall.admin.enerty.vi.AuthToken;
 import com.mall.admin.fegin.FeginService;
 import com.mall.admin.service.api.PermitService;
@@ -34,17 +37,15 @@ public class PermitController {
     @Autowired
     FeginService feginService;
 
-
     @GetMapping("/findMenuList")
     private List findMenuList() {
 
         return permitService.findMenuList();
     }
 
-    @GetMapping("/findRoleList")
-    private List findRoleList() {
-
-        return permitService.findRoleList();
+    @PostMapping("/findRoleList")
+    private Page<Role> findRoleList(@RequestBody RoleDto roleDto) {
+        return permitService.findRoleList(roleDto);
     }
 
     @GetMapping("/getUser")
@@ -64,5 +65,28 @@ public class PermitController {
 
     }
 
+    @PostMapping("/editRole")
+    private boolean editRole(@RequestBody RoleDto roleDto) {
+        return permitService.editRole(roleDto);
+
+    }
+
+    @GetMapping("/getRole")
+    private Role getRole(@RequestParam Integer roleId) {
+        return permitService.getRoleById(roleId);
+
+    }
+
+    @PostMapping("/changeStatus")
+    private boolean changeStatus(@RequestBody RoleDto roleDto) {
+        return permitService.changeStatus(roleDto.getId(),roleDto.getStatus());
+
+    }
+
+
+    @GetMapping("/deleteRole")
+    private boolean deleteRole(@RequestParam Integer roleId) {
+        return permitService.deleteRole(roleId);
+    }
 
 }

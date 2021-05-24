@@ -1,15 +1,21 @@
 package com.mall.admin.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mall.admin.config.NacosConfig;
 import com.mall.admin.contstant.Const;
 import com.mall.admin.contstant.ConstEnum;
+import com.mall.admin.contstant.IsDeleteEnum;
 import com.mall.admin.dao.MenuDao;
 import com.mall.admin.dao.RoleDao;
+import com.mall.admin.dao.impl.RoleServiceImplDao;
 import com.mall.admin.enerty.db.Menu;
 import com.mall.admin.enerty.db.Role;
 import com.mall.admin.enerty.dto.LoginParams;
+import com.mall.admin.enerty.dto.RoleDto;
 import com.mall.admin.enerty.vi.AuthToken;
 import com.mall.admin.service.api.PermitService;
 import com.mall.common.entity.UserInfo;
@@ -29,7 +35,9 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -40,7 +48,7 @@ import java.util.stream.Collectors;
  */
 @Log4j2
 @Service
-@Transactional(rollbackFor = Exception.class, readOnly = true)
+@Transactional(rollbackFor = Exception.class)
 public class PermitServiceImpl implements PermitService {
 
     @Autowired
@@ -48,6 +56,9 @@ public class PermitServiceImpl implements PermitService {
 
     @Autowired
     RoleDao roleDao;
+
+    @Autowired
+    RoleServiceImplDao roleServiceImplDao;
 
     @Autowired
     RestTemplate restTemplate;
@@ -95,16 +106,30 @@ public class PermitServiceImpl implements PermitService {
     }
 
     @Override
-    public List<Role> findRoleList() {
-        return roleDao.selectList(null);
+    public Page<Role> findRoleList(RoleDto roleDto) {
+        QueryWrapper<Role> queryWrapper = new QueryWrapper<>();
+        String roleName = roleDto.getName();
+        queryWrapper.like(StrUtil.isNotEmpty(roleName), "name", roleName);
+        queryWrapper.eq(true,"is_delete","0");
+        return roleServiceImplDao.page(new Page<>(roleDto.getCurrent(), roleDto.getPageSize()), queryWrapper);
+
+    }
+
+    private String httpBasic(String clientId, String clientSecret) {
+        //将客户端id和客户端密码拼接,按"客户端id,客户段密码"
+        String string = clientId + ":" + clientSecret;
+        //进行base64编码
+        byte[] encode = Base64Utils.encode(string.getBytes());
+
+        return "Basic " + new String(encode);
     }
 
     @Override
     public AuthToken applyForToken(LoginParams loginParams) {
         // 构造请求参数
         MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
-        String httpbasic = httpBasic(nacosConfig.getClient(), nacosConfig.getClientSecret());
-        headers.add("Authorization", httpbasic);
+        String httpBasic = httpBasic(nacosConfig.getClient(), nacosConfig.getClientSecret());
+        headers.add("Authorization", httpBasic);
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("grant_type", "password");
         body.add("username", loginParams.getUsername());
@@ -141,13 +166,35 @@ public class PermitServiceImpl implements PermitService {
         return redisService.del(key);
     }
 
-    private String httpBasic(String clientId, String clientSecret) {
-        //将客户端id和客户端密码拼接,按"客户端id,客户段密码"
-        String string = clientId + ":" + clientSecret;
-        //进行base64编码
-        byte[] encode = Base64Utils.encode(string.getBytes());
-
-        return "Basic " + new String(encode);
+    @Override
+    public Role getRoleById(Integer roleId) {
+        return roleServiceImplDao.getById(roleId);
     }
+
+
+    @Override
+    public boolean editRole(RoleDto roleDto) {
+        Role role = new Role();
+        BeanUtil.copyProperties(roleDto,role,true);
+        return roleServiceImplDao.saveOrUpdate(role);
+    }
+
+    @Override
+    public boolean deleteRole(Integer roleId) {
+        Role role =new Role();
+        role.setId(roleId);
+        role.setDeleted(IsDeleteEnum.DELETED.getCode());
+        return roleServiceImplDao.updateById(role);
+    }
+
+    @Override
+    public boolean changeStatus(Integer roleId,Integer status) {
+        Role role =new Role();
+        role.setId(roleId);
+        role.setStatus(status);
+        return roleServiceImplDao.updateById(role);
+    }
+
+
 
 }

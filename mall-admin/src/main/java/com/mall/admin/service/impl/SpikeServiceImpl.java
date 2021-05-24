@@ -51,4 +51,12 @@ public class SpikeServiceImpl implements SpikeService {
         // 新建缓存到
         return false;
     }
+
+    @Override
+    public boolean warmUpProduct(Integer productId) {
+        //查询商品库存信息
+        //缓存数据，设置失效时间
+//        redisService.set();
+        return false;
+    }
 }

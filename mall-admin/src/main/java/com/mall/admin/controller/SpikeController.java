@@ -6,8 +6,11 @@ import com.mall.admin.enerty.dto.SmsFlashPage;
 import com.mall.admin.enerty.dto.SpikeProductDto;
 import com.mall.admin.service.api.SpikeService;
 import com.mall.common.advice.response.ControllerHandle;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 /**
  * @author 谢成伟
@@ -19,6 +22,9 @@ import org.springframework.web.bind.annotation.*;
 @ControllerHandle
 @RequestMapping("spike")
 public class SpikeController {
+
+    @Resource
+    RedissonClient redissonClient;
 
     @Autowired
     SpikeService spikeService;

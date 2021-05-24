@@ -86,15 +86,13 @@ class LeftMenu extends React.Component {
                 </SubMenu>
             )
         });
-        const {location = {} } = this.props;
-        const {state } = location;
+        const username = cookie.load(Constant.COOKIE_LOGIN_USERNAME);
         return (
             <Layout style={{minHeight: '100vh'}}>
                 <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
                     <Menu theme="dark"
                           defaultSelectedKeys={['1']}
                           mode="inline"
-
                     >
                         {menuItemList}
                     </Menu>
@@ -104,7 +102,7 @@ class LeftMenu extends React.Component {
                         className="site-page-header"
                         backIcon={<GithubOutlined/>}
                         onBack={() => null}
-                        title={"欢迎您：" + state}
+                        title={"欢迎您：" + username}
                         extra={
                             [
                                 <Avatar icon={<GithubOutlined/>}/>,

@@ -60,19 +60,7 @@ class MenuList extends Component {
         }
     }
     componentWillMount() {
-        // 获取第一级菜单数据
-        HttpUtil.get(Api.findFirstMenuList).then(response => {
-            if (response.status !== "200") {
-                Modal.error({
-                    title: '获取菜单失败',
-                    content: '暂无数据请联系管理员-发送请求失败'
-                });
-                return;
-            }
-            this.setState({
-                dataSource: response.data
-            })
-        })
+
     }
 
     render() {

@@ -37,9 +37,10 @@ class Login extends Component {
                 message.error("登录失败，请联系管理员");
                 return;
             }
-            // 把用户信息存到cookie
-            let timeout = new Date(new Date().getTime() + response.data.tokenTimeout * 1000);//一天
+            // 把用户信息存到cookie //一天
+            let timeout = new Date(new Date().getTime() + response.data.tokenTimeout * 1000);
             cookie.save(Constant.COOKIE_LOGIN_KEY,response.data.accessToken,{ expires: timeout });
+            cookie.save(Constant.COOKIE_LOGIN_USERNAME,response.data.username,{ expires: timeout });
             this.props.history.push("/menu/home",response.data.username);
         })
     };

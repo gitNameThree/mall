@@ -31,5 +31,7 @@ public class Role {
     private String createTime;
     @TableField(value = "status")
     private Integer status;
+    @TableField(value = "is_delete")
+    private String deleted;
 
 }

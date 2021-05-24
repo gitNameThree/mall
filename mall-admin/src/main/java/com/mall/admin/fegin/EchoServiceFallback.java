@@ -1,7 +1,5 @@
 package com.mall.admin.fegin;
 
-import org.springframework.stereotype.Component;
-
 /**
  * @author 谢成伟
  * Date:2021/4/26

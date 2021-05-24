@@ -29,6 +29,12 @@ spring:
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.mall.admin.enerty.db
+ribbon:
+  ReadTimeout: 1000
+  ConnectTimeout: 10000
+  MaxAutoRetries: 3               #同一台实例的最大重试次数，但是不包括首次调用，默认为1次
+  MaxAutoRetriesNextServer: 0     #重试负载均衡其他实例的最大重试次数，不包括首次调用，默认为0次
+  OkToRetryOnAllOperations: true
 feign:
   sentinel:
     enabled: true
